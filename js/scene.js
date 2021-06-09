@@ -6,14 +6,18 @@ export class MainScene extends Phaser.Scene {
     init() { }
 
     preload() {
-        this.load.image('background', './images/Background.png')
-        this.load.spritesheet('player', './images/Ruan.png' ,{
-            frameWidth:1500, 
-            frameHeight: 1000
+        this.load.image('background', './images/cenario.png')
+        this.load.spritesheet('player', './images/ruan.png' ,{
+            frameWidth:128, 
+            frameHeight: 144
         })
-        this.load.spritesheet('ground', './images/Platform.png', {
-            frameWidth:1500,
-            frameHeight: 1000
+        this.load.spritesheet('ground', './images/plataform.png', {
+            frameWidth:128,
+            frameHeight: 128
+        });
+        this.load.spritesheet('objects', './images/Rope.png',{
+            frameWidth:128,
+            frameHeight: 128
         });
         }
     

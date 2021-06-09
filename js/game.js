@@ -2,8 +2,8 @@ import{ MainScene } from "./scene.js"
 import { Level001 }from "./level001.js";
 
 const config = {
-    width: 1500,
-    height: 1000,
+    width: 2048,
+    height: 2048,
     type: Phaser.AUTO,
     parent: 'game-canvas',
     scene: [MainScene, Level001],
