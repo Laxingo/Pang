@@ -9,11 +9,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
 
         this.initialFrame = frame;
 
-        this.horizontal_velocity = 200;
+        this.horizontal_velocity = 400;
 
         this.controls = scene.input.keyboard.createCursorKeys();
     
         this.onLadder= false;
+
+        this.lives = 3;
 
         this.state="stopped";
         this.previous_state=this.state;
@@ -78,5 +80,17 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
                 this.setFrame(this.initialFrame);
             }
         }
+    }
+
+    hit() {
+        this.lives--;
+    }
+
+    isDead() {
+        return this.lives === 0;
+    }
+
+    getLives() {
+        return this.lives;
     }
 }

@@ -19,7 +19,19 @@ export class MainScene extends Phaser.Scene {
             frameWidth:128,
             frameHeight: 128
         });
-        }
+
+        this.load.image('full_heart', './images/coration.png');
+        this.load.image('empty_heart', './images/empty_heart.png');
+
+        this.load.spritesheet('ball', './images/ball.png', {
+            frameWidth: 128,
+            frameHeight:128
+        });
+        this.load.spritesheet('arpoon','./images/arpao.png',{
+            frameHeight:1024,
+            frameWidth: 128
+        })
+    }
     
 
     create() {
