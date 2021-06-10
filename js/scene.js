@@ -27,10 +27,7 @@ export class MainScene extends Phaser.Scene {
             frameWidth: 128,
             frameHeight:128
         });
-        this.load.spritesheet('arpoon','./images/arpao.png',{
-            frameHeight:1024,
-            frameWidth: 128
-        })
+        
     }
     
 

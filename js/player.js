@@ -1,3 +1,38 @@
+class Arpoon extends Phaser.Physics.Arcade.Sprite{
+    constructor(scene,x,y, arpoon){
+        super(scene,x,y, 'arpoon');
+    }
+
+    fire(x,y){
+        this.body.reset(x,y);
+
+        this.setActive(true);
+        this.setVisible(true);
+
+        this.setVelocityY(-900);
+    }
+}
+
+class ArpoonGroup extends Phaser.Physics.Arcade.Group{
+    constructor(scene){
+        super(scene.physics.world, scene);
+
+        this.createMultiple({
+            classType: Arpoon,
+            frameQuantity: 30,
+            active: false,
+            visible: true,
+            key: 'arpoon'
+        })
+    }
+    fireArpoon(x, y){
+        const arpoon = this.getFirstDead(false);
+        if (arpoon){
+            arpoon.fire(x,y);
+        }
+    }
+}
+
 export class Player extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
@@ -19,10 +54,17 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
 
         this.state="stopped";
         this.previous_state=this.state;
+
+        this.arpoonGroup;
+
     }
-    /*create(){
-        this
-    }*/
+    preload(){
+        this.load.image('arpoon','./images/arpao.png');
+    }
+
+    create(){
+        this.laserGroup= new this.ArpoonGroup(this);
+    }
 
     setOnLadder(value){
         this.onLadder = value;
@@ -89,9 +131,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
 
     }
 
-    /*shootArpoon(){
-        this.
-    }*/
+   shootArpoon(){
+       this.arpoonGroup.fireArpoon(this.player.x, this.player.y -20);
+   }
 
     hit() {
         this.lives--;
