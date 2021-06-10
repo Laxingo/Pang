@@ -20,6 +20,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
         this.state="stopped";
         this.previous_state=this.state;
     }
+    /*create(){
+        this
+    }*/
 
     setOnLadder(value){
         this.onLadder = value;
@@ -80,7 +83,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite{
                 this.setFrame(this.initialFrame);
             }
         }
+        if(this.controls.space.isDown){
+            this.shootArpoon();
+        }
+
     }
+
+    /*shootArpoon(){
+        this.
+    }*/
 
     hit() {
         this.lives--;
