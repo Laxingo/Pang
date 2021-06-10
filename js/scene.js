@@ -11,6 +11,10 @@ export class MainScene extends Phaser.Scene {
             frameWidth:128, 
             frameHeight: 144
         })
+        this.load.spritesheet('player2', './images/Rosita.png' ,{
+            frameWidth:128, 
+            frameHeight: 144
+        })
         this.load.spritesheet('ground', './images/platform.png', {
             frameWidth:128,
             frameHeight: 128
@@ -56,7 +60,27 @@ export class MainScene extends Phaser.Scene {
             yoyo:true,
             repeat: -1
         });
+        this.anims.create({
+            key:'walking',
+            frames: this.anims.generateFrameNames('player2',{
+                frames:[0,1,2,3]
+            }),
+            frameRate:4,
+            yoyo:true,
+            repeat: -1
+        });
+        this.anims.create({
+            key:'climbing',
+            frames: this.anims.generateFrameNames('player2',{
+                frames:[7,8]
+            }),
+            frameRate:4,
+            yoyo:true,
+            repeat: -1
+        });
     }
+
+    
 
     update(time) { }
      

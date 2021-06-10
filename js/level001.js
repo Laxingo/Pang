@@ -1,5 +1,6 @@
 import { Player } from './player.js';
 import { Balls } from './Balls.js';
+import { Player2 } from './player2.js';
 
 let levelData = [
     //plataforma da esquerda
@@ -48,6 +49,7 @@ export class Level001 extends Phaser.Scene{
         this.controls= this.input.keyboard.createCursorKeys();
 
         this.hearts=[];
+        this.hearts2=[];
     }
 
     create(){
@@ -73,6 +75,13 @@ export class Level001 extends Phaser.Scene{
             'player', 0
         );
 
+        this.player2 = new Player2(
+            this,
+            this.game.config.width * 0.3,
+            this.game.config.height * 1,
+            'player2', 0
+        );
+
         this.ball1 = new Balls(
             this,
             this.game.config.width * 0.3,
@@ -87,11 +96,15 @@ export class Level001 extends Phaser.Scene{
         )
 
         this.physics.add.collider(this.player, this.platforms);
+        this.physics.add.collider(this.player2, this.platforms);
         this.physics.add.collider(this.ball1, this.platforms);
         this.physics.add.collider(this.ball2, this.platforms);
         this.physics.add.overlap(this.player, this.ladders, this.onLadder, null, this);
         this.physics.add.overlap(this.player, this.ball1, this.onBall, null, this);
         this.physics.add.overlap(this.player, this.ball2, this.onBall, null, this);
+        this.physics.add.overlap(this.player2, this.ladders, this.onLadder, null, this);
+        this.physics.add.overlap(this.player2, this.ball1, this.onBall, null, this);
+        this.physics.add.overlap(this.player2, this.ball2, this.onBall, null, this);
         this.prepareHUD();
 
 
@@ -104,6 +117,23 @@ export class Level001 extends Phaser.Scene{
             this.hearts.push(
                 this.add.image(128 +i * 128, 128, 'full_heart')
             );
+        }
+    }
+
+    prepareHUD2(){
+        let nLives2 = this.player2.getLives2();
+
+        for(let i=0; i < nLives2; i++){
+            this.hearts2.push(
+                this.add.image(128 +i * 128, 128, 'full_heart')
+            );
+        }
+    }
+    updateHUD2(){
+        let availableLives2= this.player2.getLives2();
+
+        for(let i = this.hearts.length -1; i>= availableLives2; --i){
+            this.hearts2[i].setTexture('empty_heart');
         }
     }
 
@@ -159,12 +189,28 @@ export class Level001 extends Phaser.Scene{
             this.scene.restart();
         }
     }
+    onBall2(player2, ball) {
+        player2.hit();
+        if(!player2.isDead()) {
+            player2.setPosition(
+                this.game.config.width * 0.5,
+                this.game.config.height * 1,
+            )
+        } else {
+            this.scene.restart();
+        }
+    }
 
 
 
     update(time){
         this.player.update(time);
+        this.player2.update(time);
         this.player.setOnLadder(false);
+        this.player2.setOnLadder(false);
+
         this.updateHUD();
+        this.updateHUD2();
+
     }
 }
