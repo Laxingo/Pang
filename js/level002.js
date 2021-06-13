@@ -5,19 +5,19 @@ import { Player2 } from './player2.js';
 let levelData = [
     //plataforma da esquerda
     {
-        x:1024 - 128,
-        y: 2048 -300,
+        x:1024 - 828,
+        y: 2048 -1000,
         repeat: 1,
         key: 'ground',
         frame:1,
         width: 128,
         height:128,
-        physics: true
+        physics: false
     },
 
     //plataforma do meio
-    {  x:1024,
-        y: 2048 -300,
+    {  x:1024-700,
+        y: 2048 -1000,
         repeat: 3,
         key: 'ground',
         frame:0,
@@ -27,21 +27,21 @@ let levelData = [
 
     },
     //platafirna da direita
-    {  x:1024 +384,
-        y: 2048 -300,
+    {  x:1024 -328,
+        y: 2048 -1000,
         repeat: 1,
         key: 'ground',
         frame:2,
         width: 128,
         height:128,
-        physics: false
+        physics: true
 
     }
 ]
 
-export class Level001 extends Phaser.Scene{
+export class Level002 extends Phaser.Scene{
     constructor() {
-        super('Level001');
+        super('Level002');
 
     }
 
@@ -166,9 +166,9 @@ export class Level001 extends Phaser.Scene{
 
     createLadder(){
         let ladder = this.add.tileSprite(
-            1024 +384, 2048 - 620, 128, 5* 128, 'objects',1).setOrigin(0);
+            1024 -896, 2048 - 896, 128, 7* 128, 'objects',1).setOrigin(0);
             let ladderTop = this.add.sprite(
-                1024 +384, 2048 - 750, 'objects', 0).setOrigin(0);
+                1024 -896, 2048 - 1024, 'objects', 0).setOrigin(0);
 
                 this.ladders.add(ladder);
                 this.ladders.add(ladderTop);

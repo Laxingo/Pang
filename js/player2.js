@@ -57,6 +57,14 @@ export class Player2 extends Phaser.Physics.Arcade.Sprite{
 
         this.arpoonGroup;
 
+        this.controls = scene.input.keyboard.addKeys({
+            up: Phaser.Input.Keyboard.KeyCodes.W,
+            down: Phaser.Input.Keyboard.KeyCodes.S,
+            right: Phaser.Input.Keyboard.KeyCodes.D,
+            left: Phaser.Input.Keyboard.KeyCodes.A,
+            space: Phaser.Input.Keyboard.KeyCodes.G
+        });
+
     }
     preload(){
         this.load.image('arpoon','./images/arpao.png');
@@ -77,18 +85,18 @@ export class Player2 extends Phaser.Physics.Arcade.Sprite{
 
         this.body.allowGravity = !this.onLadder;
 
-        if(this.controls.A.isDown){
+        if(this.controls.left.isDown){
             this.setVelocityX(-this.horizontal_velocity);
             this.flipX = true;
             if(onGround){
-            this.state= "walking";
+            this.state= "walking2";
             }
 
-        }else if(this.controls.D.isDown){
+        }else if(this.controls.right.isDown){
             this.setVelocityX(this.horizontal_velocity);
             this.flipX = false;
             if(onGround){
-                this.state= "walking";
+                this.state= "walking2";
             }
         }else{
             this.setVelocityX(0);
@@ -98,13 +106,13 @@ export class Player2 extends Phaser.Physics.Arcade.Sprite{
         }
   
         if(this.onLadder){
-            if(this.controls.W.isDown){
+            if(this.controls.up.isDown){
                 this.setVelocityY(-this.horizontal_velocity);
-                this.state = "climbing";
+                this.state = "climbing2";
               
-            }else if(this.controls.S.isDown){
+            }else if(this.controls.down.isDown){
                 this.setVelocityY(this.horizontal_velocity);
-                this.state = "climbing";
+                this.state = "climbing2";
 
             }else{
                 this.setVelocityY(0);
@@ -117,10 +125,10 @@ export class Player2 extends Phaser.Physics.Arcade.Sprite{
                 this.anims.stop();
             }
 
-            if(this.state == 'walking'){
-                this.anims.play('walking');
-            }else if(this.state == 'climbing'){
-                this.anims.play('climbing');
+            if(this.state == 'walking2'){
+                this.anims.play('walking2');
+            }else if(this.state == 'climbing2'){
+                this.anims.play('climbing2');
             }else if(this.state == 'stopped'){
                 this.setFrame(this.initialFrame);
             }
@@ -143,7 +151,7 @@ isDead() {
     return this.lives2 === 0;
 }
 
-getLives() {
+getLives2() {
     return this.lives2;
 }
 

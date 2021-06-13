@@ -27,6 +27,9 @@ export class MainScene extends Phaser.Scene {
         this.load.image('full_heart', './images/coration.png');
         this.load.image('empty_heart', './images/empty_heart.png');
 
+        this.load.image('full_heart2', './images/coration.png');
+        this.load.image('empty_heart2', './images/empty_heart.png');
+
         this.load.spritesheet('ball', './images/ball.png', {
             frameWidth: 128,
             frameHeight:128
@@ -61,7 +64,7 @@ export class MainScene extends Phaser.Scene {
             repeat: -1
         });
         this.anims.create({
-            key:'walking',
+            key:'walking2',
             frames: this.anims.generateFrameNames('player2',{
                 frames:[0,1,2,3]
             }),
@@ -70,7 +73,7 @@ export class MainScene extends Phaser.Scene {
             repeat: -1
         });
         this.anims.create({
-            key:'climbing',
+            key:'climbing2',
             frames: this.anims.generateFrameNames('player2',{
                 frames:[7,8]
             }),
